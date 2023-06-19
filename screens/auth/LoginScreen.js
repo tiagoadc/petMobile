@@ -18,6 +18,7 @@ import CustomAlert from "../../components/CustomAlert/CustomAlert";
 import ProgressDialog from "react-native-progress-dialog";
 import InternetConnectionAlert from "react-native-internet-connection-alert";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Logo from "../../assets/logo/logoSvg.svg";
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -110,25 +111,32 @@ const LoginScreen = ({ navigation }) => {
   return (
     <InternetConnectionAlert onChange={(connectionState) => {}}>
       <KeyboardAvoidingView
-        // behavior={Platform.OS === "ios" ? "padding" : "height"}
+        behavior={Platform.OS === "ios" ? "position" : "height"}
         style={styles.container}
       >
         <ScrollView style={{ flex: 1, width: "100%" }}>
           <ProgressDialog visible={isloading} label={"Login ..."} />
           <StatusBar></StatusBar>
+          <View style={styles.ViewLogo}>
+            <Image
+              style={styles.logo}
+              source={require("../../assets/logo/logoDog.png")}
+            />
+          </View>
           <View style={styles.welconeContainer}>
             <View>
-              <Text style={styles.welcomeText}>Bem vindo ao PetAoLado</Text>
+              <Text style={styles.welcomeText}>Bem vindo</Text>
               <Text style={styles.welcomeParagraph}>
-                o Melhor App para o seu Pet
+                Falta pouco para começar a
+              </Text>
+              <Text style={styles.welcomeParagraph}>
+                presentear seu amiguinho!
               </Text>
             </View>
-            <View>
-              <Image style={styles.logo} source={header_logo} />
-            </View>
+            <View></View>
           </View>
           <View style={styles.screenNameContainer}>
-            <Text style={styles.screenNameText}>Login</Text>
+            <Text style={styles.screenNameText}>Fazer Login</Text>
           </View>
           <View style={styles.formContainer}>
             <CustomAlert message={error} type={"error"} />
@@ -137,7 +145,7 @@ const LoginScreen = ({ navigation }) => {
               setValue={setEmail}
               placeholder={"Username"}
               placeholderTextColor={colors.muted}
-              radius={5}
+              radius={40}
             />
             <CustomInput
               value={password}
@@ -145,14 +153,14 @@ const LoginScreen = ({ navigation }) => {
               secureTextEntry={true}
               placeholder={"Password"}
               placeholderTextColor={colors.muted}
-              radius={5}
+              radius={40}
             />
             <View style={styles.forgetPasswordContainer}>
               <Text
                 onPress={() => navigation.navigate("forgetpassword")}
                 style={styles.ForgetText}
               >
-                Forget Password?
+                Esqueci a senha
               </Text>
             </View>
           </View>
@@ -161,12 +169,12 @@ const LoginScreen = ({ navigation }) => {
           <CustomButton text={"Login"} onPress={loginHandle} />
         </View>
         <View style={styles.bottomContainer}>
-          <Text>Don't have an account?</Text>
+          <Text>Não tem uma conta?</Text>
           <Text
             onPress={() => navigation.navigate("signup")}
             style={styles.signupText}
           >
-            signup
+            Criar
           </Text>
         </View>
       </KeyboardAvoidingView>
@@ -178,24 +186,26 @@ export default LoginScreen;
 
 const styles = StyleSheet.create({
   container: {
+    display: "flex",
     width: "100%",
-    flexDirecion: "row",
-    backgroundColor: colors.light,
+    flexDirection: "row",
+    backgroundColor: "#C9D5F3",
     alignItems: "center",
     justifyContent: "center",
-    padding: 20,
+    padding: 30,
     flex: 1,
   },
   welconeContainer: {
     width: "100%",
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "center",
     alignItems: "center",
     height: "30%",
     // padding:15
   },
   formContainer: {
+    marginTop: -10,
     flex: 3,
     justifyContent: "flex-start",
     alignItems: "center",
@@ -204,22 +214,35 @@ const styles = StyleSheet.create({
     flexDirecion: "row",
     padding: 5,
   },
+  ViewLogo: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 10,
+    marginTop: 80,
+  },
+
   logo: {
-    resizeMode: "contain",
-    width: 80,
+    //resizeMode: "center",
+    width: 300,
+    height: 250,
   },
   welcomeText: {
-    fontSize: 42,
-    fontWeight: "bold",
-    color: colors.muted,
+    color: "#557CD2",
+    fontFamily: "Montserrat-semiBold",
+    fontSize: 24,
+    textAlign: "center",
   },
   welcomeParagraph: {
-    fontSize: 15,
-    fontWeight: "500",
-    color: colors.primary_shadow,
+    color: "black",
+    fontFamily: "Montserrat",
+    fontSize: 20,
+    marginTop: 0,
   },
   forgetPasswordContainer: {
-    marginTop: 10,
+    marginTop: 0,
     width: "100%",
     display: "flex",
     flexDirection: "row",
@@ -227,16 +250,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   ForgetText: {
-    fontSize: 15,
-    fontWeight: "600",
+    fontSize: 14,
+    fontFamily: "Montserrat",
   },
   buttomContainer: {
     display: "flex",
+    flexDirection: "row",
     justifyContent: "center",
-    width: "100%",
   },
   bottomContainer: {
     marginTop: 10,
+    marginBottom: 15,
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
@@ -248,16 +272,15 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   screenNameContainer: {
-    marginTop: 10,
+    marginBottom: 10,
     width: "100%",
     display: "flex",
     flexDirection: "row",
-    justifyContent: "flex-start",
+    justifyContent: "center",
     alignItems: "center",
   },
   screenNameText: {
-    fontSize: 30,
-    fontWeight: "800",
-    color: colors.muted,
+    fontFamily: "Montserrat-semiBold",
+    fontSize: 16,
   },
 });

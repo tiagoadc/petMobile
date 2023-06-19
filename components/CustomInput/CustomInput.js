@@ -44,5 +44,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     elevation: 5,
     paddingHorizontal: 20,
+    fontSize: 16,
+    height: 50,
   },
 });
